@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12  shadow-lg p-3 mb-5 bg-white rounded">
+        <h4 class="text-center alert alert-primary">List of Patients</h4>
+        {% if p_data %}
+            <table id="example" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Disease</th>
+                        <th scope="col">Under</th>
+                        <th scope="col">Bill</th>
+                        <th scope="col">1st Dose</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                    {% for ob in p_data %}
+                        <tr >
+                            <th scope="row">{{ob.patient_id}}</th>
+                            <td>{{ob.firstname}}</td>
+                            <td>{{ob.lastname}}</td>
+                            <td>{{ob.gender}}</td>
+                            <td>{{ob.age}}</td>
+                            <td>{{ob.disease}}</td>
+                            <td>{{ob.doctor}}</td>
+                            <td>{{ob.fees}}</td>
+                            <td>{{ob.medicine_date}}</td>
+                            <td><form action="/{{ ob.patient_id }}" method="POST" class="d-inline f">
+                                {% csrf_token %}
+                                    <input type="submit" value="Edit" name="edit" class="btn btn-sm btn-warning ">
+                                </form>
+                                <form action="/delete/{{ob.patient_id}}" method="POST" class="d-inline f">
+                                    {% csrf_token %}
+                                    <input type="submit" value="Delete" name="delete" class="btn btn-sm btn-danger ">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+        <h5 class="text-center alert alert-danger m-3">No entries were found</h3>
+        {% endif %}
+        <a href="/create" class=" btn btn-primary mt-2"> Create a new entry </a>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
+{% endblock content %}

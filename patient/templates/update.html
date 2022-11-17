@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    *{
+        list-style: none;
+    }
+    .errorlist li{
+        color: red;
+    }
+    label{
+        display: inline;
+    }
+</style>
+    <div class="row">
+        <div class="col-sm-6 offset-3 shadow-lg p-3 mb-5 bg-white rounded">
+            <h4 class='text-center alert alert-secondary'> update patient info </h4>
+            <form action="" method="POST" >
+                {% csrf_token %}
+                {{form1}}
+                <input type="submit" value="Update" class="btn btn-success m-2" >
+                <a href="{% url 'create' %}" class="btn btn-info">back</a>
+            </form>
+        </div>
+    </div>
+    <script>
+        
+    </script>
+{% endblock content %}

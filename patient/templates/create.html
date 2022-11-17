@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-5 offset-3 shadow-lg p-3 mb-5 bg-white rounded">
+        <h4 class="text-center alert alert-primary">Add a new patient</h4>
+        <style>
+            *{
+                list-style: none;
+            }
+            .errorlist li{
+                color: rgb(255, 0, 0);
+            }
+        </style>
+        <form action='' method="POST" >
+            {% csrf_token %}
+                {{form}}
+                <input class="btn btn-success mt-2" type="submit" value="Create">
+                <a href="/display" class=" btn btn-primary mt-2"> List of all Patients </a>
+        </form>
+    </div>
+</div>
+{% endblock content %}
